@@ -3,7 +3,7 @@ from PIL import ImageFont
 
 inkyphat.set_colour("yellow")
 
-font = ImageFont.truetype(inkyphat.fonts.FredokaOne, 18)
+font = ImageFont.truetype("./8bitoperator.ttf", 18)
 
 inkyphat.text((5, 0), "16:44 - Kings Lynn - 16m", inkyphat.BLACK, font)
 inkyphat.text((5, 20), "16:48 - Ely - 13m", inkyphat.BLACK, font)
