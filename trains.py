@@ -5,7 +5,7 @@ import time
 
 inkyphat.set_colour("yellow")
 font = ImageFont.truetype("./8bitoperator.ttf", 12)
-update_period_seconds = 3
+update_period_seconds = 60*3
 
 def update_display():
     print("Getting train services...")
