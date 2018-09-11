@@ -1,7 +1,7 @@
 import inkyphat
 from PIL import ImageFont
 import national_rail_fetcher
-from time import sleep
+import time
 
 inkyphat.set_colour("yellow")
 font = ImageFont.truetype("./8bitoperator.ttf", 12)
@@ -38,4 +38,3 @@ def update_display():
 while True:
     update_display()
     time.sleep(update_period_seconds)
-    
