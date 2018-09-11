@@ -5,4 +5,4 @@ darwin_sesh = DarwinLdbSession(wsdl="https://lite.realtime.nationalrail.co.uk/Op
 
 board = darwin_sesh.get_station_board('MAN')
 
-print(board.location_name);
+print(board.location_name)
