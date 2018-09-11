@@ -6,7 +6,11 @@ inkyphat.set_colour("yellow")
 
 font = ImageFont.truetype("./8bitoperator.ttf", 12)
 
+print("Getting train services")
+
 services = national_rail_fetcher.get_next_services()
+
+print("Got upcoming train services")
 
 some_services_delayed = any(x.etd != 'On time' for x in services)
 
@@ -27,4 +31,8 @@ for line in lines:
     inkyphat.text((5, y), line, inkyphat.BLACK, font)
     y += 20
 
+print("Displaying results")
+
 inkyphat.show()
+
+print("Finished")
