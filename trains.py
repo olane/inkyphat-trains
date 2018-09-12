@@ -26,12 +26,14 @@ def update_display():
 
         lines.append(service_string)
 
+    print("Displaying results...")
+    inkyphat.clear()
+    
     y = 0
     for line in lines:
         inkyphat.text((5, y), line, inkyphat.BLACK, font)
         y += 20
 
-    print("Displaying results...")
     inkyphat.show()
     print("Finished")
 
