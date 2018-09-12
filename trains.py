@@ -14,7 +14,9 @@ def update_display():
 
     some_services_delayed = any(x.etd != 'On time' for x in services)
 
-    lines = []
+    print("Displaying results...")
+    inkyphat.clear()
+    y = 0
     for service in services:
         time_string = service.std
         if(service.etd != 'On time'):
@@ -24,14 +26,7 @@ def update_display():
 
         service_string = '{time} {destination} '.format(time=time_string_padded, destination=service.destination_text)
 
-        lines.append(service_string)
-
-    print("Displaying results...")
-    inkyphat.clear()
-    
-    y = 0
-    for line in lines:
-        inkyphat.text((5, y), line, inkyphat.BLACK, font)
+        inkyphat.text((5, y), service_string, inkyphat.BLACK, font)
         y += 20
 
     inkyphat.show()
