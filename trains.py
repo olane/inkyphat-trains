@@ -14,6 +14,7 @@ UPDATE_PERIOD_SECONDS = 60*3
 FONT_SIZE = 12
 LINE_HEIGHT = 20
 LEFT_PADDING = 1
+TIME_WIDTH = 45
 DELAY_TEXT_WIDTH = inkyphat.WIDTH // 4
 DELAY_TEXT_PADDING = 5
 
@@ -35,10 +36,8 @@ def update_display():
         time_string = service.std
         destination_string = service.destination_text
 
-        time_string_padded = '{time: <5}'.format(time=time_string)
-        service_string = '{time} {destination} '.format(time=time_string_padded, destination=destination_string)
-
-        inkyphat.text((LEFT_PADDING, y), service_string, inkyphat.BLACK, font)
+        inkyphat.text((LEFT_PADDING, y), time_string, inkyphat.BLACK, font)
+        inkyphat.text((LEFT_PADDING + TIME_WIDTH, y), destination_string, inkyphat.BLACK, font)
 
         if(service.etd != 'On time'):
             cutout_start = inkyphat.WIDTH - DELAY_TEXT_WIDTH
