@@ -10,7 +10,7 @@ update_period_seconds = 60*3
 def clear_area(start_x, start_y, width, height):
     for i in range(start_x, start_x + width):
         for j in range(start_y, start_y + height):
-            inkyphat.put_pixel((i, j), inkyphat.WHITE)
+            inkyphat.putpixel((i, j), inkyphat.WHITE)
 
 def update_display():
     print("Getting train services...")
