@@ -2,6 +2,10 @@ import inkyphat
 from PIL import ImageFont
 import national_rail_fetcher
 import time
+import sys
+
+station_from = sys.argv[1]
+station_to = sys.argv[2]
 
 inkyphat.set_colour("yellow")
 font = ImageFont.truetype("./8bitoperator.ttf", 12)
@@ -19,7 +23,7 @@ def clear_area(start_x, start_y, width, height):
 
 def update_display():
     print("Getting train services...")
-    services = national_rail_fetcher.get_next_services()
+    services = national_rail_fetcher.get_next_services(station_from, station_to)
     print("Got upcoming train services")
 
     print("Displaying results...")

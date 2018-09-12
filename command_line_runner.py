@@ -1,6 +1,8 @@
 import national_rail_fetcher
 
-services = national_rail_fetcher.get_next_services()
+station_from = sys.argv[1]
+station_to = sys.argv[2]
+services = national_rail_fetcher.get_next_services(station_from, station_to)
 
 some_services_delayed = any(x.etd != 'On time' for x in services)
 
