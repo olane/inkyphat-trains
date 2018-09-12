@@ -5,7 +5,11 @@ import time
 
 inkyphat.set_colour("yellow")
 font = ImageFont.truetype("./8bitoperator.ttf", 12)
-update_period_seconds = 60*3
+
+UPDATE_PERIOD_SECONDS = 60*3
+FONT_SIZE = 12
+LINE_HEIGHT = 20
+DELAY_TEXT_WIDTH = inkyphat.WIDTH // 4
 
 def clear_area(start_x, start_y, width, height):
     for i in range(start_x, start_x + width):
@@ -30,15 +34,15 @@ def update_display():
         inkyphat.text((5, y), service_string, inkyphat.BLACK, font)
 
         if(service.etd != 'On time'):
-            clear_area(inkyphat.WIDTH - 40, y, 40, 20)
+            clear_area(inkyphat.WIDTH - DELAY_TEXT_WIDTH, y, DELAY_TEXT_WIDTH, LINE_HEIGHT)
             estimated_time_string = ' ({expected})'.format(expected=service.etd)
-            inkyphat.text((inkyphat.WIDTH - 40, y), estimated_time_string, inkyphat.BLACK, font)
+            inkyphat.text((inkyphat.WIDTH - DELAY_TEXT_WIDTH, y), estimated_time_string, inkyphat.BLACK, font)
         
-        y += 20
+        y += LINE_HEIGHT
 
     inkyphat.show()
     print("Finished")
 
 while True:
     update_display()
-    time.sleep(update_period_seconds)
+    time.sleep(UPDATE_PERIOD_SECONDS)
