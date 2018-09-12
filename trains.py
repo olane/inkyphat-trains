@@ -10,6 +10,7 @@ UPDATE_PERIOD_SECONDS = 60*3
 FONT_SIZE = 12
 LINE_HEIGHT = 20
 DELAY_TEXT_WIDTH = inkyphat.WIDTH // 4
+DELAY_TEXT_PADDING = 5
 
 def clear_area(start_x, start_y, width, height):
     for i in range(start_x, start_x + width):
@@ -34,9 +35,12 @@ def update_display():
         inkyphat.text((5, y), service_string, inkyphat.BLACK, font)
 
         if(service.etd != 'On time'):
-            clear_area(inkyphat.WIDTH - DELAY_TEXT_WIDTH, y, DELAY_TEXT_WIDTH, LINE_HEIGHT)
-            estimated_time_string = ' ({expected})'.format(expected=service.etd)
-            inkyphat.text((inkyphat.WIDTH - DELAY_TEXT_WIDTH, y), estimated_time_string, inkyphat.BLACK, font)
+            cutout_start = inkyphat.WIDTH - DELAY_TEXT_WIDTH
+            text_start = cutout_start + DELAY_TEXT_PADDING
+
+            clear_area(cutout_start, y, DELAY_TEXT_WIDTH, LINE_HEIGHT)
+            estimated_time_string = '({expected})'.format(expected=service.etd)
+            inkyphat.text((text_start, y), estimated_time_string, inkyphat.BLACK, font)
         
         y += LINE_HEIGHT
 
