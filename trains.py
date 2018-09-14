@@ -9,6 +9,7 @@ station_to = sys.argv[2]
 
 inkyphat.set_colour("yellow")
 font = ImageFont.truetype("./8bitoperator.ttf", 12)
+small_font = ImageFont.truetype("./8bitoperator.ttf", 8)
 
 UPDATE_PERIOD_SECONDS = 60*3
 FONT_SIZE = 12
@@ -46,12 +47,27 @@ def update_display():
             clear_area(cutout_start, y, DELAY_TEXT_WIDTH, LINE_HEIGHT)
             estimated_time_string = '({expected})'.format(expected=service.etd)
             inkyphat.text((text_start, y), estimated_time_string, inkyphat.BLACK, font)
+
+        time_departure_delta_string = pretty_time_delta(service.time_until_departure.total_seconds())
+        inkyphat.text((LEFT_PADDING, y+10), time_departure_delta_string, inkyphat.BLACK, small_font)
         
         y += LINE_HEIGHT
 
     inkyphat.show()
     print("Finished")
 
+def pretty_time_delta(seconds):
+    seconds = int(seconds)
+    hours, seconds = divmod(seconds, 3600)
+    minutes, seconds = divmod(seconds, 60)
+    if hours > 0:
+        return '%dh%dm' % (hours, minutes)
+    elif minutes > 0:
+        return '%dm' % (minutes)
+    else:
+        return '%ds' % (seconds,)
+
 while True:
     update_display()
     time.sleep(UPDATE_PERIOD_SECONDS)
+
