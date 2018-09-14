@@ -1,4 +1,5 @@
 import national_rail_fetcher
+import sys
 
 station_from = sys.argv[1]
 station_to = sys.argv[2]
