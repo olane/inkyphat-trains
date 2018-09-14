@@ -32,33 +32,36 @@ def update_display():
     print("Displaying results...")
     inkyphat.clear()
     inkyphat.set_border(inkyphat.WHITE)
+    
     y = 0
     for service in services:
-        time_string = service.std
-        destination_string = service.destination_text
-
-        inkyphat.text((LEFT_PADDING, y-4), time_string, inkyphat.BLACK, font)
-        inkyphat.text((LEFT_PADDING + TIME_WIDTH, y-4), destination_string, inkyphat.BLACK, font)
-
-        if(service.etd != 'On time'):
-            cutout_start = inkyphat.WIDTH - DELAY_TEXT_WIDTH
-            text_start = cutout_start + DELAY_TEXT_PADDING
-
-            clear_area(cutout_start, y, DELAY_TEXT_WIDTH, LINE_HEIGHT)
-            estimated_time_string = '({expected})'.format(expected=service.etd)
-            inkyphat.text((text_start, y), estimated_time_string, inkyphat.BLACK, font)
-
-        try:
-            time_departure_delta_string = pretty_time_delta(service.time_until_departure.total_seconds())
-            inkyphat.text((LEFT_PADDING+TIME_WIDTH, y+7), time_departure_delta_string, inkyphat.YELLOW, small_font)
-        except AttributeError:
-            pass
-            # there was no time until departure, presumably
-        
+        render_service(service, y)
         y += LINE_HEIGHT
 
     inkyphat.show()
     print("Finished")
+
+def render_service(service, y):
+    time_string = service.std
+    destination_string = service.destination_text
+
+    inkyphat.text((LEFT_PADDING, y-4), time_string, inkyphat.BLACK, font)
+    inkyphat.text((LEFT_PADDING + TIME_WIDTH, y-4), destination_string, inkyphat.BLACK, font)
+
+    if(service.etd != 'On time'):
+        cutout_start = inkyphat.WIDTH - DELAY_TEXT_WIDTH
+        text_start = cutout_start + DELAY_TEXT_PADDING
+
+        clear_area(cutout_start, y, DELAY_TEXT_WIDTH, LINE_HEIGHT)
+        estimated_time_string = '({expected})'.format(expected=service.etd)
+        inkyphat.text((text_start, y), estimated_time_string, inkyphat.BLACK, font)
+
+    try:
+        time_departure_delta_string = pretty_time_delta(service.time_until_departure.total_seconds())
+        inkyphat.text((LEFT_PADDING+TIME_WIDTH, y+7), time_departure_delta_string, inkyphat.YELLOW, small_font)
+    except AttributeError:
+        pass
+        # there was no time until departure, presumably
 
 def pretty_time_delta(seconds):
     seconds = int(seconds)
