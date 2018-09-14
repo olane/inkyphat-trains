@@ -8,12 +8,12 @@ station_from = sys.argv[1]
 station_to = sys.argv[2]
 
 inkyphat.set_colour("yellow")
-font = ImageFont.truetype("./8bitoperator.ttf", 12)
-small_font = ImageFont.truetype("./8bitoperator.ttf", 8)
+font = ImageFont.truetype("./8bitoperator.ttf", 11)
+small_font = ImageFont.truetype("./8bitoperator.ttf", 10)
 
 UPDATE_PERIOD_SECONDS = 60*3
-FONT_SIZE = 12
-LINE_HEIGHT = 20
+FONT_SIZE = 11
+LINE_HEIGHT = inkyphat.HEIGHT // 5 + 1
 LEFT_PADDING = 1
 TIME_WIDTH = 43
 DELAY_TEXT_WIDTH = inkyphat.WIDTH // 4
@@ -37,8 +37,8 @@ def update_display():
         time_string = service.std
         destination_string = service.destination_text
 
-        inkyphat.text((LEFT_PADDING, y), time_string, inkyphat.BLACK, font)
-        inkyphat.text((LEFT_PADDING + TIME_WIDTH, y), destination_string, inkyphat.BLACK, font)
+        inkyphat.text((LEFT_PADDING, y-4), time_string, inkyphat.BLACK, font)
+        inkyphat.text((LEFT_PADDING + TIME_WIDTH, y-4), destination_string, inkyphat.BLACK, font)
 
         if(service.etd != 'On time'):
             cutout_start = inkyphat.WIDTH - DELAY_TEXT_WIDTH
@@ -49,7 +49,7 @@ def update_display():
             inkyphat.text((text_start, y), estimated_time_string, inkyphat.BLACK, font)
 
         time_departure_delta_string = pretty_time_delta(service.time_until_departure.total_seconds())
-        inkyphat.text((LEFT_PADDING, y+10), time_departure_delta_string, inkyphat.BLACK, small_font)
+        inkyphat.text((LEFT_PADDING+TIME_WIDTH, y+7), time_departure_delta_string, inkyphat.YELLOW, small_font)
         
         y += LINE_HEIGHT
 
