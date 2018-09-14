@@ -48,8 +48,12 @@ def update_display():
             estimated_time_string = '({expected})'.format(expected=service.etd)
             inkyphat.text((text_start, y), estimated_time_string, inkyphat.BLACK, font)
 
-        time_departure_delta_string = pretty_time_delta(service.time_until_departure.total_seconds())
-        inkyphat.text((LEFT_PADDING+TIME_WIDTH, y+7), time_departure_delta_string, inkyphat.YELLOW, small_font)
+        try:
+            time_departure_delta_string = pretty_time_delta(service.time_until_departure.total_seconds())
+            inkyphat.text((LEFT_PADDING+TIME_WIDTH, y+7), time_departure_delta_string, inkyphat.YELLOW, small_font)
+        except AttributeError:
+            pass
+            # there was no time until departure, presumably
         
         y += LINE_HEIGHT
 
