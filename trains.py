@@ -57,7 +57,7 @@ def render_service(service, y):
     service_is_delayed = service.etd != 'On time'
     if(service_is_delayed):
         estimated_time_string = '({expected})'.format(expected=service.etd)
-        inkyphat.text((text_start, y + font_services_offset), estimated_time_string, inkyphat.BLACK, font_services)
+        inkyphat.text((text_start, y + font_times_offset), estimated_time_string, inkyphat.BLACK, font_times)
 
     try:
         text_offset = 10 if service_is_delayed else 0
