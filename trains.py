@@ -22,8 +22,13 @@ DELAY_TEXT_WIDTH = inkyphat.WIDTH // 4
 DELAY_TEXT_PADDING = 5
 
 def clear_area(start_x, start_y, width, height):
-    for i in range(start_x, start_x + width):
-        for j in range(start_y, start_y + height):
+    x = max(start_x, 0)
+    y = max(start_y, 0)
+    x_end = min(start_x + width, inkyphat.WIDTH - 1)
+    y_end = min(start_y + height, inkyphat.HEIGHT - 1)
+    
+    for i in range(x, x_end):
+        for j in range(y, y_end):
             inkyphat.putpixel((i, j), inkyphat.WHITE)
 
 def update_display():
