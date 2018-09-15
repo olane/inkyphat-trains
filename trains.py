@@ -13,7 +13,7 @@ font_services_offset = -4
 font_times = ImageFont.truetype("./8bitoperator.ttf", 10)
 font_times_offset = -2
 
-UPDATE_PERIOD_SECONDS = 60*3
+UPDATE_PERIOD_SECONDS = 90
 FONT_SIZE = 11
 LINE_HEIGHT = inkyphat.HEIGHT // 5 + 1
 LEFT_PADDING = 1
