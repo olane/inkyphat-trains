@@ -11,7 +11,7 @@ inkyphat.set_colour("yellow")
 font_services = ImageFont.truetype("./8bitoperator.ttf", 11)
 font_services_offset = -4
 font_times = ImageFont.truetype("./8bitoperator.ttf", 10)
-font_times_offset = -3
+font_times_offset = -2
 
 UPDATE_PERIOD_SECONDS = 60*3
 FONT_SIZE = 11
