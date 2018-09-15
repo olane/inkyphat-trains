@@ -52,23 +52,28 @@ def render_service(service, y):
     time_string = service.std
     destination_string = service.destination_text
 
-    inkyphat.text((LEFT_PADDING, y + font_services_offset), time_string, inkyphat.BLACK, font_services)
-    inkyphat.text((LEFT_PADDING + TIME_WIDTH, y + font_services_offset), destination_string, inkyphat.BLACK, font_services)
+    time_string_x = LEFT_PADDING
+    time_string_y = y + font_services_offset
+    destination_string_x = LEFT_PADDING + TIME_WIDTH
+    destination_string_y = y + font_services_offset
+
+    inkyphat.text((time_string_x, time_string_y), time_string, inkyphat.BLACK, font_services)
+    inkyphat.text((destination_string_x, destination_string_y), destination_string, inkyphat.BLACK, font_services)
 
     cutout_start = inkyphat.WIDTH - DELAY_TEXT_WIDTH
-    text_start = cutout_start + DELAY_TEXT_PADDING
     clear_area(cutout_start, y, DELAY_TEXT_WIDTH, LINE_HEIGHT)
+    right_column_string_x = cutout_start + DELAY_TEXT_PADDING
 
     service_is_delayed = service.etd != 'On time'
     if(service_is_delayed):
         estimated_time_string = '({expected})'.format(expected=service.etd)
-        inkyphat.text((text_start, y + font_times_offset), estimated_time_string, inkyphat.BLACK, font_times)
+        inkyphat.text((right_column_string_x, y + font_times_offset), estimated_time_string, inkyphat.BLACK, font_times)
 
     try:
         text_offset = 10 if service_is_delayed else 0
         text_offset = text_offset + font_times_offset
         time_departure_delta_string = pretty_time_delta(service.time_until_departure.total_seconds())
-        inkyphat.text((text_start, y + text_offset), time_departure_delta_string, inkyphat.YELLOW, font_times)
+        inkyphat.text((right_column_string_x, y + text_offset), time_departure_delta_string, inkyphat.YELLOW, font_times)
     except AttributeError:
         pass
         # there was no time until departure, presumably
