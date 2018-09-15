@@ -26,7 +26,7 @@ def clear_area(start_x, start_y, width, height):
     y = max(start_y, 0)
     x_end = min(start_x + width, inkyphat.WIDTH - 1)
     y_end = min(start_y + height, inkyphat.HEIGHT - 1)
-    
+
     for i in range(x, x_end):
         for j in range(y, y_end):
             inkyphat.putpixel((i, j), inkyphat.WHITE)
@@ -68,7 +68,7 @@ def render_service(service, y):
         text_offset = 10 if service_is_delayed else 0
         text_offset = text_offset + font_times_offset
         time_departure_delta_string = pretty_time_delta(service.time_until_departure.total_seconds())
-        inkyphat.text((text_start, text_offset), time_departure_delta_string, inkyphat.YELLOW, font_times)
+        inkyphat.text((text_start, y + text_offset), time_departure_delta_string, inkyphat.YELLOW, font_times)
     except AttributeError:
         pass
         # there was no time until departure, presumably
