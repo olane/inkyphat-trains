@@ -23,13 +23,13 @@ def attach_time_until_departure(service):
         # Don't care if we fail to attach time until departure
 
 # Note: this assumes that the time it is passed is
-#    - in the future
-#    - less than 24 hours in the future
+#    - less than 1 hour in the past
+#    - less than 23 hours in the future
 def get_datetime_from_board_time(board_time):
     time_portion = datetime.strptime(board_time,"%H:%M")
     d = datetime.combine(datetime.today(), time_portion.time())
 
-    if d < datetime.now():
+    if d < (datetime.now() - timedelta(hours=1)):
         # The time we parsed was past midnight, so we should combine it with tomorrow's date not today's
         d = d + timedelta(days=1)
 
