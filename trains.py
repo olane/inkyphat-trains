@@ -21,6 +21,11 @@ TIME_WIDTH = 43
 DELAY_TEXT_WIDTH = inkyphat.WIDTH // 4
 DELAY_TEXT_PADDING = 5
 
+ROTATE_SCREEN = True
+
+if(ROTATE_SCREEN):
+    inkyphat.set_rotation(180)
+
 def clear_area(start_x, start_y, width, height):
     x = max(start_x, 0)
     y = max(start_y, 0)
