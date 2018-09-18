@@ -14,3 +14,11 @@ Install the pip requirements
 ```
 > pip install -r requirements.txt
 ```
+
+## Running
+
+```
+python3 trains.py STATION DESTINATION
+```
+
+where the two stations are represented by their three letter codes.
