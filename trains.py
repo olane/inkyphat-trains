@@ -1,3 +1,5 @@
+#!/usr/bin/python3.5
+
 import inkyphat
 from PIL import ImageFont
 import national_rail_fetcher
