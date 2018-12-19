@@ -14,8 +14,10 @@ font_services = ImageFont.truetype("./8bitoperator.ttf", 11)
 font_services_offset = -4
 font_times = ImageFont.truetype("./8bitoperator.ttf", 10)
 font_times_offset = -2
+font_errors = font_times;
 
 UPDATE_PERIOD_SECONDS = 90
+UPDATE_PERIOD_AFTER_ERROR_SECONDS = 30
 FONT_SIZE = 11
 LINE_HEIGHT = inkyphat.HEIGHT // 5 + 1
 LEFT_PADDING = 1
@@ -97,6 +99,18 @@ def pretty_time_delta(seconds):
         return '%ds' % (seconds,)
 
 while True:
-    update_display()
-    time.sleep(UPDATE_PERIOD_SECONDS)
+    try:
+        update_display()
+        time.sleep(UPDATE_PERIOD_SECONDS)
+    except Exception as err:
+        render_error(err)
+        time.sleep(UPDATE_PERIOD_AFTER_ERROR_SECONDS)
 
+def render_error(error):
+    try:
+        print("Error while updating display, attempting to render:", error)
+        inkyphat.clear()
+        inkyphat.set_border(inkyphat.WHITE)
+        inkyphat.text((1, 1), repr(error), inkyphat.BLACK, font_errors)
+    except Exception as error2:
+        print("Exception while trying to render error:", error2)
