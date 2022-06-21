@@ -27,7 +27,7 @@ microdotphat==0.2.1
 mote==0.0.3
 motephat==0.0.2
 nre-darwin-py==0.2.0
-numpy==1.12.1
+numpy==1.22.0
 oauthlib==2.0.1
 pantilthat==0.0.6
 pgzero==1.2
